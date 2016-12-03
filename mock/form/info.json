@@ -1,10 +1,10 @@
 {
-    "code": 0,
+    "errno": 0,
+    "errmsg": "success",
     "data": {
-        "currentPage": 1,
+        "page": 1,
         "pageSize": 20,
-        "totalPage": 6,
-        "totalCount": 102,
+        "total": 102,
         "data": [
             {
                 "key": "1",

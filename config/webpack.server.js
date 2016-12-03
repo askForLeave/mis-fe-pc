@@ -70,8 +70,7 @@ fs.readdir(DEV_DIR, function(err, files) {
                             confAry.forEach(function(confline) {
                                 var conflineAry = confline.split(/\s+/g);
                                 conflineAry[1] && (mockPathMap[conflineAry[0]] = conflineAry[1]);
-                            })
-                            // console.log(data.toString());
+                            });
                         }
                     });
                 }

@@ -8,7 +8,7 @@ var autoprefixer = require('autoprefixer');
 var webpackConfig = {
         entry: {
             // 公用模块入口
-            lib: ['react', 'react-dom', 'react-redux', 'jquery', 'antd/dist/antd.css']
+            lib: ['react', 'react-dom', 'react-redux', 'react-router', 'immutable', 'react-router-redux', 'antd/dist/antd.css']
         },
         output: {},
         plugins: [
@@ -108,9 +108,9 @@ module.exports = function(devDir, outputDir, customEnv) {
         } catch (e) {
             console.error(e.message);
         }
-    })
+    });
 
     makeOutput(outputDir, customEnv);
 
     return webpackConfig;
-}
+};
