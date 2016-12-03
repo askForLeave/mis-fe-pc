@@ -1,0 +1,21 @@
+{
+    "code": 0,
+    "data": {
+        "currentPage": 1,
+        "pageSize": 20,
+        "totalPage": 6,
+        "totalCount": 102,
+        "data": [
+            {
+                "key": "1",
+                "name": "科比",
+                "gender": 1
+            },
+            {
+                "key": "2",
+                "name": "李娜",
+                "gender": 0
+            }
+        ]
+    }
+}
