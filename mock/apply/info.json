@@ -1,0 +1,11 @@
+{
+  "errno": 0,
+  "errmsg": "success",
+  "data": {
+    "annualTotal": 12,
+    "annualLeft": 10,
+    "department": "软件学院",
+    "manager": "李明翰",
+    "name": "杨牧童"
+  }
+}

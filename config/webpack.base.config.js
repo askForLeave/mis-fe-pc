@@ -6,9 +6,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 var webpackConfig = {
+        devtool: 'eval-source-map',
         entry: {
             // 公用模块入口
-            lib: ['react', 'react-dom', 'react-redux', 'react-router', 'immutable', 'react-router-redux', 'antd/dist/antd.css']
+            lib: ['react', 'react-dom', 'react-redux', 'react-router', 'immutable', 'jquery', 'react-router-redux']
         },
         output: {},
         plugins: [
@@ -38,6 +39,22 @@ var webpackConfig = {
                     ]
                 }
             }, {
+                test: /\.js$/,
+                loader: 'babel',
+                include: [
+                    path.resolve(__dirname, '../src')
+                ],
+                query: {
+                    plugins: ['transform-runtime'],
+                    presets: [
+                        'es2015',
+                        'stage-0',
+                        'stage-1',
+                        'stage-2',
+                        'stage-3'
+                    ]
+                }
+            }, {
                 test: /\.less$/,
                 loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
             }, {
@@ -50,7 +67,7 @@ var webpackConfig = {
             browsers: ['IOS > 7', 'Android > 4']
         })]
 
-    }
+    };
     // 生成入口配置
 function makeEntry(devDir, fileName, customEnv) {
     webpackConfig.entry[fileName] = customEnv.makeEntry(
@@ -66,7 +83,7 @@ function makeOutput(outputDir, customEnv) {
 }
 // 生成插件配置配置
 function makePlugins(devDir, fileName, customEnv) {
-    var htmlPath = fileName + '/' + fileName + '.html'
+    var htmlPath = fileName + '/' + fileName + '.html';
         // 生成 HtmlWebpackPlugin 配置
     webpackConfig.plugins.push(
         new HtmlWebpackPlugin(
