@@ -38,7 +38,7 @@ var webpackConfig = make(DEV_DIR, OUTPUT_DIR, customEnv);
 
 webpackConfig.plugins = webpackConfig.plugins.concat([
     new webpack.DefinePlugin({
-        DOMAIN: 'b.nuomi.com',
+        DOMAIN: 'leave.tju.edu.com',
         'process.env': {
             'NODE_ENV': '"production"'
         }

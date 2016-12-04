@@ -6,21 +6,23 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 var webpackConfig = {
-        devtool: 'eval-source-map',
+        // devtool: 'eval-source-map',
         entry: {
             // 公用模块入口
-            lib: ['react', 'react-dom', 'react-redux', 'react-router', 'immutable', 'jquery', 'react-router-redux']
+            common: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux', 'redux-thunk'],
+            util: ['immutable', 'underscore']
         },
         output: {},
         plugins: [
             // 公共模块提取
             new webpack.optimize.CommonsChunkPlugin({
-                name: 'lib',
+                name: ['common', 'util'],
                 minChunks: Infinity
             }),
 
             // css文件提取
-            new ExtractTextPlugin('[name]/[name].[chunkhash].css')
+            new ExtractTextPlugin('[name]/[name].[chunkhash].css'),
+
         ],
         module: {
             loaders: [{
@@ -87,15 +89,13 @@ function makePlugins(devDir, fileName, customEnv) {
         // 生成 HtmlWebpackPlugin 配置
     webpackConfig.plugins.push(
         new HtmlWebpackPlugin(
-            customEnv.makePlugins(
-                'HtmlWebpackPlugin', {
+            customEnv.makePlugins('HtmlWebpackPlugin', {
                     cache: false,
                     title: fileName,
-                    filename: htmlPath,
-                    template: devDir + '/' + htmlPath,
-                    chunks: ['lib', fileName]
-                }, fileName
-            )
+                    filename: htmlPath, // 输出的html文件名
+                    template: devDir + '/' + htmlPath, // 模板文件目录
+                    chunks: ['common', 'util', fileName] // 允许添加到html中的块，在entry中指定的lib和makeEntry中指定的filename
+                }, fileName)
         )
     );
 }
@@ -105,22 +105,22 @@ function makePlugins(devDir, fileName, customEnv) {
  * customEnv  不同环境配置加工实现
  */
 module.exports = function(devDir, outputDir, customEnv) {
-    var files = fs.readdirSync(devDir);
+    var dirs = fs.readdirSync(devDir);
     // 遍历devDir下一级文件夹，生成相关entry,plugins配置
-    files.forEach(function(fileName) {
-        var htmlPath = path.resolve(__dirname, '.' + devDir + '/' + fileName + '/' + fileName + '.html');
+    dirs.forEach(function(dirName) {
+        var htmlPath = path.resolve(__dirname, '.' + devDir + '/' + dirName + '/' + dirName + '.html');
         console.log(htmlPath);
         try {
             // 判断文件是否存在
             var stat = fs.statSync(htmlPath);
             if (stat.isFile()) {
-                console.log('当前文件夹：' + fileName);
+                console.log('当前文件夹：' + dirName);
 
                 // 生成入口文件配置
-                makeEntry(devDir, fileName, customEnv);
+                makeEntry(devDir, dirName, customEnv);
 
-                // 成才HtmlWebpackPlugin
-                makePlugins(devDir, fileName, customEnv);
+                // HtmlWebpackPlugin
+                makePlugins(devDir, dirName, customEnv);
             }
         } catch (e) {
             console.error(e.message);
