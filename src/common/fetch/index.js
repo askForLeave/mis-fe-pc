@@ -1,5 +1,5 @@
 import waite from './loading.js';
-import { notification } from 'antd';
+import notification from 'antd/lib/notification';
 import { param } from '../util';
 
 /**
@@ -55,17 +55,7 @@ export default (url = '', options) => {
                         resolve(json.data);
                     }
                     else {
-                        if (json.errno == '1003') {
-                            notification.open({
-                                message: '您没有活动平台操作权限',
-                                description: '如有需要，请联系管理员，添加权限，chengenpeng@baidu.com',
-                                duration: 0
-                            });
-                            setTimeout(() => options.loading && waite.close(), 200);
-                        }
-                        else {
-                            reject(json.errmsg || '没有错误提示,请检查返回数据格式');
-                        }
+                        // 返回错误处理
                     }
                 });
             })

@@ -20,7 +20,7 @@ var customEnv = {
         switch (pluginKey) {
             case 'HtmlWebpackPlugin':
                 // 添加热部署文件
-                originalConfig.chunks.unshift('devServer'); // 添加一个devServer块
+                // originalConfig.chunks.unshift('devServer'); // 添加一个devServer块
                 return originalConfig;
             default:
 

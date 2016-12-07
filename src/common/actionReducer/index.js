@@ -53,7 +53,6 @@ export default function actionReducer(initialState, actionAndReducer) {
             if (action.type === key) {
                 return standard[key].updater(state, action) || state;
             }
-
         }
         return state;
     };

@@ -6,17 +6,16 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 var webpackConfig = {
-        // devtool: 'eval-source-map',
+        devtool: 'eval-source-map',
         entry: {
             // 公用模块入口
-            common: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux', 'redux-thunk'],
-            util: ['immutable', 'underscore']
+            lib: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux', 'immutable', 'underscore', 'redux-thunk']
         },
         output: {},
         plugins: [
             // 公共模块提取
             new webpack.optimize.CommonsChunkPlugin({
-                name: ['common', 'util'],
+                name: ['lib'],
                 minChunks: Infinity
             }),
 
@@ -94,7 +93,7 @@ function makePlugins(devDir, fileName, customEnv) {
                     title: fileName,
                     filename: htmlPath, // 输出的html文件名
                     template: devDir + '/' + htmlPath, // 模板文件目录
-                    chunks: ['common', 'util', fileName] // 允许添加到html中的块，在entry中指定的lib和makeEntry中指定的filename
+                    chunks: ['lib', fileName] // 允许添加到html中的块，在entry中指定的lib和makeEntry中指定的filename
                 }, fileName)
         )
     );
