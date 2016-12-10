@@ -6,6 +6,7 @@ import Row from 'antd/lib/row';
 import Col from 'antd/lib/col';
 import Menu from 'antd/lib/menu';
 import Icon from 'antd/lib/icon';
+import info from '../reducers/info.js';
 const Item = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
@@ -15,6 +16,9 @@ class App extends Component {
         this.state = {
             username: 'yangmutong'
         };
+    }
+    componentWillMount() {
+        this.props.infoActions.USER_INFO_FETCH(this.state.username);
     }
     handleClick (e) {
         console.log(e);
@@ -67,12 +71,14 @@ class App extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        routing: state.routing
+        routing: state.routing,
+        info: state.info.toJS()
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
-        routerActions: bindActionCreators(routerActions, dispatch)
+        routerActions: bindActionCreators(routerActions, dispatch),
+        infoActions: bindActionCreators(info.creators, dispatch)
     };
 }
 

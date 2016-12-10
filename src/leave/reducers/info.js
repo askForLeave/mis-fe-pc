@@ -11,7 +11,43 @@ let initialState = immutable.fromJS({
     department: '',
     annualTotal: 0,
     annualLeft: 0,
-    manager: ''
+    manager: '',
+    type: {
+        '1': {
+            name: '年假',
+            description: '描述'
+        },
+        '2': {
+            name: '婚假',
+            description: '描述'
+        },
+        '3': {
+            name: '产假/陪产假',
+            description: '描述'
+        },
+        '4': {
+            name: '病假',
+            description: '描述'
+        },
+        '5': {
+            name: '丧假',
+            description: '描述'
+        },
+        '6': {
+            name: '公假',
+            description: '描述'
+        },
+        '7': {
+            name: '事假',
+            description: '描述'
+        }
+    },
+    status: {
+        '1': '草稿',
+        '2': '待审核',
+        '3': '审核通过',
+        '4': '驳回'
+    }
 });
 
 export default actionReducer(initialState, {

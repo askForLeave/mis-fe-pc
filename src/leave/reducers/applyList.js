@@ -10,7 +10,8 @@ let initialState = immutable.fromJS({
     list: [],
     page: 1,
     pageSize: 10,
-    total: 0
+    total: 0,
+    form: {}
 });
 
 export default actionReducer(initialState, {

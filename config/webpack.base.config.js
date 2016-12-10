@@ -6,7 +6,6 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 var webpackConfig = {
-        devtool: 'eval-source-map',
         entry: {
             // 公用模块入口
             lib: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-redux', 'redux', 'immutable', 'underscore', 'redux-thunk']
