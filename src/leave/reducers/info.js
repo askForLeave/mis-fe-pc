@@ -7,7 +7,7 @@ import fetch from '../../common/fetch';
 
 let initialState = immutable.fromJS({
     name: '',
-    username: '',
+    username: 'yangmutong',
     department: '',
     annualTotal: 0,
     annualLeft: 0,

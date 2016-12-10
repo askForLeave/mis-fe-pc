@@ -17,7 +17,6 @@ class Index extends Component {
         };
     }
     componentWillMount() {
-        this.props.infoActions.USER_INFO_FETCH(this.state.username);
         this.setState({
             loading: false
         });

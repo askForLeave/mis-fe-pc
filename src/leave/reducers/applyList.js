@@ -10,8 +10,7 @@ let initialState = immutable.fromJS({
     list: [],
     page: 1,
     pageSize: 10,
-    total: 0,
-    form: {}
+    total: 0
 });
 
 export default actionReducer(initialState, {
@@ -81,9 +80,9 @@ export default actionReducer(initialState, {
             message.info('删除成功');
             const that = this;
             return (dispatch, getState) => {
-                const tmp = getState().applyList.toJs();
+                const tmp = getState().applyList.toJS();
                 const params = {
-                    username: getState().info.username,
+                    username: getState().info.toJS().username,
                     page: tmp.page,
                     pageSize: tmp.pageSize
                 };
@@ -105,10 +104,11 @@ export default actionReducer(initialState, {
     },
     APPLY_INFO_ADD_RECEIVE: {
         creator() {
+            const that = this;
             return (dispatch, getState) => {
-                const tmp = getState().applyList.toJs();
+                const tmp = getState().applyList.toJS();
                 const params = {
-                    username: getState().info.username,
+                    username: getState().info.toJS().username,
                     page: tmp.page,
                     pageSize: tmp.pageSize
                 };
@@ -120,7 +120,7 @@ export default actionReducer(initialState, {
         creator(params) {
             const that = this;
             return (dispatch, getState) => {
-                fetch('/leave/apply/update', {
+                fetch('/leave/apply/modify', {
                     data: params
                 }).then(function (res) {
                     dispatch(that.APPLY_INFO_UPDATE_RECEIVE());
@@ -130,10 +130,11 @@ export default actionReducer(initialState, {
     },
     APPLY_INFO_UPDATE_RECEIVE: {
         creator() {
+            const that = this;
             return (dispatch, getState) => {
-                const tmp = getState().applyList.toJs();
+                const tmp = getState().applyList.toJS();
                 const params = {
-                    username: getState().info.username,
+                    username: getState().info.toJS().username,
                     page: tmp.page,
                     pageSize: tmp.pageSize
                 };
