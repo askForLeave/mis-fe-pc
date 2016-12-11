@@ -82,6 +82,7 @@ class ReviewModal extends Component {
                         <Col span={24}>结束时间：{moment.unix(review.record.endTime).format('YYYY/MM/DD HH:mm:ss')}</Col>
                         <Col span={24}>请假原因：{review.record.reason}</Col>
                     </Row>
+                    <br/>
                     <Form {...formProps}>
                         <FormItem label="审核结果">
                             {getFieldDecorator('status', {

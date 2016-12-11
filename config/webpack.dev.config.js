@@ -30,7 +30,7 @@ var customEnv = {
 
 var webpackConfig = make(DEV_DIR, OUTPUT_DIR, customEnv);
 // source map
-webpackConfig.devtool = 'eval-source-map';
+// webpackConfig.devtool = 'eval-source-map';
 
 // 热部署模块
 webpackConfig.entry['devServer'] = ['webpack-dev-server/client?http://127.0.0.1:8080'];

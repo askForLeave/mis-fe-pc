@@ -9,7 +9,6 @@ moment.locale('zh-cn');
 export default class DraftTable extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
     }
     pageChange (page) {
         const {applyActions, applyList, info} = this.props;
@@ -21,7 +20,6 @@ export default class DraftTable extends Component {
     }
 
     deleteApply(record) {
-        console.log(record);
         const {applyActions} = this.props;
         Modal.warning({
             title: '警告',

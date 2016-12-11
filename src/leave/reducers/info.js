@@ -7,7 +7,7 @@ import fetch from '../../common/fetch';
 
 let initialState = immutable.fromJS({
     name: '',
-    username: 'yangmutong',
+    username: location.search.substring(1).split('=')[1],
     department: '',
     annualTotal: 0,
     annualLeft: 0,

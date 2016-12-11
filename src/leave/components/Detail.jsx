@@ -29,7 +29,6 @@ export default class Detail extends Component {
 
     render() {
         const {record, info} = this.props;
-        console.log(record);
         const modalProps = {
             visible: this.state.visible,
             title: '申请详情',

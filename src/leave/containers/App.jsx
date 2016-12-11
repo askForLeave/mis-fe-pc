@@ -7,6 +7,7 @@ import Col from 'antd/lib/col';
 import Menu from 'antd/lib/menu';
 import Icon from 'antd/lib/icon';
 import info from '../reducers/info.js';
+import Avatar from '../components/Avatar.jsx';
 const Item = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
@@ -21,11 +22,11 @@ class App extends Component {
         this.props.infoActions.USER_INFO_FETCH(this.state.username);
     }
     handleClick (e) {
-        console.log(e);
         const {routerActions:{push}} = this.props;
         push(e.key);
     }
     render() {
+        const {children, routing, info} = this.props;
         const title = [
             <span><Icon type="edit" /><span>请假申请</span></span>,
             <span><Icon type="inbox" /><span>请假审核</span></span>
@@ -35,13 +36,15 @@ class App extends Component {
             mode: 'inline',
             onClick: handleClick
         };
-        const {children, routing} = this.props;
         return (
             <div className="leave-container">
                 <header id="header" className="leave-header">
                     <Row>
                         <Col span={6} className="leave-logo">假</Col>
-                        <Col span={18}></Col>
+                        <Col span={12}></Col>
+                        <Col span={6}>
+                            <Avatar info={info}/>
+                        </Col>
                     </Row>
                 </header>
                 <div className="leave-main" id="main">
@@ -62,7 +65,8 @@ class App extends Component {
                     </Row>
                 </div>
                 <footer id="footer" className="leave-footer">
-                    &copy; TJU
+                    <div className="leave-footer-copy">&copy; TJU</div>
+                    <div className="leave-footer-power">Powered by team</div>
                 </footer>
             </div>
         );
