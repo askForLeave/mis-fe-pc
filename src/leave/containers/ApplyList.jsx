@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import applyList from '../reducers/applyList.js';
-import Table from 'antd/lib/table';
 import Tabs from 'antd/lib/tabs';
 import Icon from 'antd/lib/icon';
 import EditModal from '../components/EditModal.jsx';

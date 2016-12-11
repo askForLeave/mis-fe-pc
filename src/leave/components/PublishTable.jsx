@@ -33,7 +33,12 @@ export default class PublishTable extends Component {
             }, {
                 title: '假期类型',
                 dataIndex: 'type',
-                key: 'type'
+                key: 'type',
+                render: (text) => {
+                    return (
+                        <span>{info.type[text].name}</span>
+                    );
+                }
             }, {
                 title: '申请人',
                 dataIndex: 'applyUserName',
@@ -71,7 +76,12 @@ export default class PublishTable extends Component {
             }, {
                 title: '当前状态',
                 dataIndex: 'status',
-                key: 'status'
+                key: 'status',
+                render: (text) => {
+                    return (
+                        <span>{info.status[text]}</span>
+                    );
+                }
             }, {
                 title: '审核原因',
                 dataIndex: 'reviewReason',
