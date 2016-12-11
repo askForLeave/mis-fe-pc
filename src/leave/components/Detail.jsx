@@ -28,7 +28,6 @@ export default class Detail extends Component {
     }
 
     render() {
-        console.log(this.props);
         const {record, info} = this.props;
         console.log(record);
         const modalProps = {

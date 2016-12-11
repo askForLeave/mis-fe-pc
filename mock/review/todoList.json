@@ -7,14 +7,14 @@
     "total": 100,
     "list": [
       {
-        "applyTime": 1480746460873,
+        "applyTime": 1480746460,
         "applyUserName": "杨牧童",
         "department": "天大",
-        "startTime": 1480746460873,
-        "endTime": 1480746460873,
+        "startTime": 1480746460,
+        "endTime": 1480746460,
         "type": 1,
         "status": 1,
-        "reason": "",
+        "reason": "就是想请假",
         "id": 1212334,
         "reviewer": "李明翰"
       }

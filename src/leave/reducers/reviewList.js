@@ -59,19 +59,19 @@ export default actionReducer(initialState, {
             return state.merge(action.payload);
         }
     },
-    REVIEW_REVIEW_ACTION_FETCH: {
+    REVIEW_ACTION_FETCH: {
         creator(params) {
             const that = this;
             return (dispatch) => {
                 fetch('/leave/review/action', {
                     data: params
                 }).then(function (res) {
-                    dispatch(that.REVIEW_REVIEW_ACTION_RECEIVE(res));
+                    dispatch(that.REVIEW_ACTION_RECEIVE(res));
                 });
             }
         }
     },
-    REVIEW_REVIEW_ACTION_RECEIVE: {
+    REVIEW_ACTION_RECEIVE: {
         creator(res) {
             message.info('审核成功');
             const that = this;

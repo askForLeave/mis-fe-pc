@@ -33,23 +33,28 @@ class EditModal extends Component {
         const {edit, form} = this.props;
         form.validateFields((err, values) => {
             if (!err) {
-                const params = {
-                    username: edit.info.username,
-                    startTime: values.time[0].unix(),
-                    endTime: values.time[1].unix(),
-                    type: values.type,
-                    reason: values.reason,
-                    submitStatus: values.submitStatus
-                };
-                if (edit.type === 'add') {
-                    edit.applyActions.APPLY_INFO_ADD_FETCH(params);
+                if (values.type == 1 && this.getDayRange() > edit.info.annualLeft) {
+                    message.error('剩余年假时间不足');
+
                 } else {
-                    params.id = edit.form.id;
-                    edit.applyActions.APPLY_INFO_UPDATE_FETCH(params);
+                    const params = {
+                        username: edit.info.username,
+                        startTime: values.time[0].unix(),
+                        endTime: values.time[1].unix(),
+                        type: values.type,
+                        reason: values.reason,
+                        submitStatus: values.submitStatus
+                    };
+                    if (edit.type === 'add') {
+                        edit.applyActions.APPLY_INFO_ADD_FETCH(params);
+                    } else {
+                        params.id = edit.form.id;
+                        edit.applyActions.APPLY_INFO_UPDATE_FETCH(params);
+                    }
+                    this.setState({
+                        visible: false
+                    });
                 }
-                this.setState({
-                    visible: false
-                });
             }
         });
     }
@@ -80,7 +85,15 @@ class EditModal extends Component {
         if (form.getFieldValue('time')) {
             const start = form.getFieldValue('time')[0];
             const end = form.getFieldValue('time')[1];
-            return end.diff(start, 'day');
+            let tmp = moment(start.valueOf());
+            let count = 1;
+            while (tmp.isBefore(end)) {
+                if (!(tmp.get('day') === 6 || tmp.get('day') === 0)) {
+                    count += 1;
+                }
+                tmp = tmp.add(1, 'day');
+            }
+            return count;
         }
         return '0';
     }
@@ -133,16 +146,16 @@ class EditModal extends Component {
                             <p>请假天数：{this.getDayRange()}</p>
                         </FormItem>
                         <FormItem label="请假原因">
-                            {getFieldDecorator('reason', {
-                                rules: [{
-                                    type: 'string',
-                                    required: true,
-                                    message: '请填写请假原因'
-                                }]
-                            })(
-                                <Input placeholder="请输入请假原因" />
-                            )}
-                        </FormItem>
+                        {getFieldDecorator('reason', {
+                            rules: [{
+                                type: 'string',
+                                required: true,
+                                message: '请填写请假原因'
+                            }]
+                        })(
+                            <Input placeholder="请输入请假原因" />
+                        )}
+                    </FormItem>
                         <FormItem
                             label="提交至"
                         >
@@ -174,10 +187,6 @@ class EditModal extends Component {
             });
         }
     }
-}
-
-function mapPropsToFields(props) {
-    return props.edit.form;
 }
 
 EditModal = Form.create()(EditModal);

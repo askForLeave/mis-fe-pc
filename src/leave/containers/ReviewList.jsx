@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import reviewList from '../reducers/reviewList.js';
 import Tabs from 'antd/lib/tabs';
 import Icon from 'antd/lib/icon';
+import TodoTable from '../components/TodoTable.jsx';
+import DoneTable from '../components/DoneTable.jsx';
 
 const TabPane = Tabs.TabPane;
 
@@ -38,20 +40,30 @@ class ReviewList extends Component {
         }
     }
     render() {
-
+        const {reviewActions, info, reviewList} = this.props;
         const tabProps = {
             defaultActiveKey: 'todo',
             onChange: e => this.tabChange(e)
         };
 
+        const todoProps = {
+            info,
+            reviewList,
+            reviewActions
+        };
+        const doneProps = {
+            info,
+            reviewList,
+            reviewActions
+        };
         return (
             <div className="review-list-container">
                 <Tabs {...tabProps}>
                     <TabPane tab={<span><Icon type="delete" />未审核</span>} key="todo">
-
+                        <TodoTable {...todoProps} />
                     </TabPane>
                     <TabPane tab={<span><Icon type="save" />已审核</span>} key="done">
-
+                        <DoneTable {...doneProps} />
                     </TabPane>
                 </Tabs>
             </div>
