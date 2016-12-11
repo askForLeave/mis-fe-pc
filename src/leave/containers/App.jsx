@@ -40,7 +40,9 @@ class App extends Component {
             <div className="leave-container">
                 <header id="header" className="leave-header">
                     <Row>
-                        <Col span={6} className="leave-logo">假</Col>
+                        <Col span={6} className="leave-logo">
+                            <a href="#index">假</a>
+                        </Col>
                         <Col span={12}></Col>
                         <Col span={6}>
                             <Avatar info={info}/>
