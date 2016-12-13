@@ -17,6 +17,6 @@
 
 #### 如何启动项目
 
-安装npm包：npm install --registry=http://nfe.baidu.com:8881
+安装npm包：npm install
 
 运行**npm run dev**编译当前业务文件到./dist目录下，编译完成后运行**npm start**启动mock服务，然后打开[http://127.0.0.1:8080/](http://127.0.0.1:8080/)访问即可。默认8080端口 如果想修改端口运行**npm start -- -p 8088**
