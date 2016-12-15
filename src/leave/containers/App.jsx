@@ -27,14 +27,18 @@ class App extends Component {
     }
     render() {
         const {children, routing, info} = this.props;
+        console.log(this.props);
         const title = [
             <span><Icon type="edit" /><span>请假申请</span></span>,
-            <span><Icon type="inbox" /><span>请假审核</span></span>
+            <span><Icon type="inbox" /><span>审核管理</span></span>,
+            <span><Icon type="plus-circle-o" /><span>加班申请</span></span>,
+            <span><Icon type="question" /><span>帮助信息</span></span>
         ];
         const handleClick = e => this.handleClick(e);
         const menuProps = {
             mode: 'inline',
-            onClick: handleClick
+            onClick: handleClick,
+            selectedKeys: [this.props.location.pathname.substring(1)]
         };
         return (
             <div className="leave-container">
@@ -53,11 +57,17 @@ class App extends Component {
                     <Row>
                         <Col lg={4} md={6} sm={24} className="leave-side-bar" id="side-bar">
                             <Menu {...menuProps}>
-                                <SubMenu key="leaveaApply" title={title[0]}>
+                                <SubMenu key="apply" title={title[0]}>
                                     <Item key="applyList">请假列表</Item>
                                 </SubMenu>
-                                <SubMenu key="leaveReview" title={title[1]}>
+                                <SubMenu key="review" title={title[1]}>
                                     <Item key="reviewList">审核列表</Item>
+                                </SubMenu>
+                                <SubMenu key="add" title={title[2]}>
+                                    <Item key="addList">加班申请</Item>
+                                </SubMenu>
+                                <SubMenu key="helpList" title={title[3]}>
+                                    <Item key="help">帮助信息</Item>
                                 </SubMenu>
                             </Menu>
                         </Col>

@@ -18,14 +18,29 @@ moment.locale('zh-cn');
 class EditModal extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
-            visible: false
+            visible: false,
+            description: props.edit.type === 'add' ? '' : props.edit.info.type[props.edit.form.type].description
         };
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            description: ''
+        });
     }
 
     handleClick() {
         this.setState({
             visible: true
+        });
+    }
+
+    handleSelect(value) {
+        const {edit} = this.props;
+        this.setState({
+            description: edit.info.type[value].description
         });
     }
 
@@ -35,7 +50,8 @@ class EditModal extends Component {
             if (!err) {
                 if (values.type == 1 && this.getDayRange() > edit.info.annualLeft) {
                     message.error('剩余年假时间不足');
-
+                } else if (values.time[0].isBefore(moment().hour(0).minute(0).second(0))) {
+                    message.error('请假开始时间必须大于当前时间');
                 } else {
                     const params = {
                         username: edit.info.username,
@@ -112,7 +128,7 @@ class EditModal extends Component {
             vertical: true
         };
         const typeOptions = _.map(edit.info.type, (value, key) => {
-            return <Option key={key} value={key}>{value.name} ({value.description})</Option>
+            return <Option key={key} value={key}>{value.name}</Option>
         });
         return (
             <div className="edit-leave-modal">
@@ -126,10 +142,11 @@ class EditModal extends Component {
                                     message: '请选择请假类型'
                                 }]
                             })(
-                                <Select placeholder="选择一种假期">
+                                <Select placeholder="选择一种假期" onSelect={value => this.handleSelect(value)}>
                                     {typeOptions}
                                 </Select>
                             )}
+                            <p>{this.state.description}</p>
                         </FormItem>
                         <FormItem
                             label="假期范围"

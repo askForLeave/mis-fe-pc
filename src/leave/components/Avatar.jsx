@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Menu from 'antd/lib/menu';
 import Dropdown from 'antd/lib/dropdown';
 import Icon from 'antd/lib/icon';
-import Tag from 'antd/lib/tag';
+import { hashHistory } from 'react-router';
 export default class Avatar extends Component {
     constructor(props) {
         super(props);
@@ -11,15 +11,17 @@ export default class Avatar extends Component {
     handleSelect(item) {
         if (item.key === 'logout') {
             location.href = '/logout';
+        } else {
+            hashHistory.push('/help');
         }
     }
     render() {
         const {info} = this.props;
+        console.log(this.props);
         const menu = (
             <Menu onSelect={this.handleSelect.bind(this)}>
-                <Menu.Item key="logout">
-                    <Tag color="#87d068" >注销登录</Tag>
-                </Menu.Item>
+                <Menu.Item key="logout"><Icon type="logout" />注销登录</Menu.Item>
+                <Menu.Item key="help"><Icon type="question-circle-o" />帮助</Menu.Item>
             </Menu>
         );
         const dropdownProps = {

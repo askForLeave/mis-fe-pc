@@ -31,7 +31,7 @@ export default class TodoTable extends Component {
                     );
                 }
             }, {
-                title: '假期类型',
+                title: '类型',
                 dataIndex: 'type',
                 key: 'type',
                 render: (text) => {
@@ -53,7 +53,7 @@ export default class TodoTable extends Component {
                 key: 'startTime',
                 render: (text) => {
                     return (
-                        <span>{moment.unix(text).format('YYYY/MM/DD HH:mm:ss')}</span>
+                        <span>{moment.unix(text).format('YYYY/MM/DD')}</span>
                     );
                 }
             }, {
@@ -62,7 +62,7 @@ export default class TodoTable extends Component {
                 key: 'endTime',
                 render: (text) => {
                     return (
-                        <span>{moment.unix(text).format('YYYY/MM/DD HH:mm:ss')}</span>
+                        <span>{moment.unix(text).format('YYYY/MM/DD')}</span>
                     );
                 }
             }, {

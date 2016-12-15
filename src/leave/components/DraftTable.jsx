@@ -71,7 +71,7 @@ export default class DraftTable extends Component {
                 key: 'startTime',
                 render: (text) => {
                     return (
-                        <span>{moment.unix(text).format('YYYY/MM/DD HH:mm:ss')}</span>
+                        <span>{moment.unix(text).format('YYYY/MM/DD')}</span>
                     );
                 }
             }, {
@@ -80,7 +80,7 @@ export default class DraftTable extends Component {
                 key: 'endTime',
                 render: (text) => {
                     return (
-                        <span>{moment.unix(text).format('YYYY/MM/DD HH:mm:ss')}</span>
+                        <span>{moment.unix(text).format('YYYY/MM/DD')}</span>
                     );
                 }
             }, {
