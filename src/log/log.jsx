@@ -29,7 +29,11 @@ class LogPane extends Component {
                     }
                 }).then((res) => {
                     if (!res.errno) {
-                        location.href = '/leave/leave.html?username=' + res.username;
+                        if (document.body.clientWidth <= 480) {
+                            location.href = '/mobile/index.html?username=' + res.username;
+                        } else {
+                            location.href = '/leave/leave.html?username=' + res.username;
+                        }
                     } else {
                         message.error(res.errmsg);
                     }
