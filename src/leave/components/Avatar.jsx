@@ -17,7 +17,6 @@ export default class Avatar extends Component {
     }
     render() {
         const {info} = this.props;
-        console.log(this.props);
         const menu = (
             <Menu onSelect={this.handleSelect.bind(this)}>
                 <Menu.Item key="logout"><Icon type="logout" />注销登录</Menu.Item>

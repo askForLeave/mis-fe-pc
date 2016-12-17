@@ -34,10 +34,9 @@ export default class DraftTable extends Component {
             }
         });
     }
-
     render() {
         const {applyList, applyActions, info} = this.props;
-
+        console.log('draft table');
         const draftTableProps = {
             columns: [{
                 title: '申请时间',
@@ -104,7 +103,7 @@ export default class DraftTable extends Component {
                 title: '操作',
                 dataIndex: 'operation',
                 key: 'operation',
-                render: (text, record, index) => {
+                render: (text, record) => {
                     const updateProps = {
                         form: record,
                         info,

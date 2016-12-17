@@ -18,7 +18,6 @@ moment.locale('zh-cn');
 class EditModal extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             visible: false,
             description: props.edit.type === 'add' ? '' : props.edit.info.type[props.edit.form.type].description
@@ -194,9 +193,9 @@ class EditModal extends Component {
         );
     }
 
-    componentDidMount() {
-        const {form, edit} = this.props;
-        if (!_.isEmpty(edit.form)) {
+    componentWillReceiveProps(nextProps) {
+        const {form, edit} = nextProps;
+        if (edit.type === 'update') {
             form.setFieldsInitialValue({
                 type: '' + edit.form.type,
                 time: [moment.unix(edit.form.startTime), moment.unix(edit.form.endTime)],

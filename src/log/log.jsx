@@ -25,7 +25,7 @@ class LogPane extends Component {
                 fetch('/leave/auth/login', {
                     data: {
                         username: values.username,
-                        passwd: values.password
+                        password: values.password
                     }
                 }).then((res) => {
                     if (!res.errno) {
@@ -58,13 +58,6 @@ class LogPane extends Component {
                     )}
                 </FormItem>
                 <FormItem>
-                    {getFieldDecorator('remember', {
-                        valuePropName: 'checked',
-                        initialValue: true,
-                    })(
-                        <Checkbox>Remember me</Checkbox>
-                    )}
-                    <br/>
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         登录
                     </Button>

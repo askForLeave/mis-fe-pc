@@ -61,22 +61,20 @@ export default actionReducer(initialState, {
         }
     },
     APPLY_INFO_DELETE_FETCH: {
-        creator(id) {
+        creator(params) {
             const that = this;
             return (dispatch) => {
                 fetch('/leave/apply/delete', {
-                    data: {
-                        id
-                    }
+                    data: params
                 }).then(function (res) {
-                    dispatch(that.APPLY_INFO_DELETE_RECEIVE(res, id));
+                    dispatch(that.APPLY_INFO_DELETE_RECEIVE());
                 });
             }
 
         }
     },
     APPLY_INFO_DELETE_RECEIVE: {
-        creator(res, id) {
+        creator(id) {
             message.info('删除成功');
             const that = this;
             return (dispatch, getState) => {

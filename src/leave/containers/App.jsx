@@ -27,7 +27,6 @@ class App extends Component {
     }
     render() {
         const {children, routing, info} = this.props;
-        console.log(this.props);
         const title = [
             <span><Icon type="edit" /><span>请假申请</span></span>,
             <span><Icon type="inbox" /><span>审核管理</span></span>,
