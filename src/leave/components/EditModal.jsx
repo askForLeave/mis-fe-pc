@@ -91,7 +91,7 @@ class EditModal extends Component {
         }
     }
 
-    disabledData(current) {
+    disabledDate(current) {
         return current && current.valueOf() < Date.now() || (current.get('day') === 6 || current.get('day') === 0);
     }
 
@@ -157,7 +157,7 @@ class EditModal extends Component {
                                     message: '请选择起止时间'
                                 }]
                             })(
-                                <RangePicker disabledDate={this.disabledData.bind(this)} />
+                                <RangePicker disabledDate={this.disabledDate.bind(this)} />
                             )}
                             <p>请假天数：{this.getDayRange()}</p>
                         </FormItem>
