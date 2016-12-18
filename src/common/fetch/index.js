@@ -1,5 +1,5 @@
 import waite from './loading.js';
-import notification from 'antd/lib/notification';
+import message from 'antd/lib/message';
 import { param } from '../util';
 
 /**
@@ -56,6 +56,14 @@ export default (url = '', options) => {
                     }
                     else {
                         // 返回错误处理
+                        if (json.errno == 4) {
+                            message.error("当前状态未登录，正在带您去登录");
+                            setTimeout(() => {
+                                location.href = "/log/log.html"
+                            }, 2000);
+                        } else {
+                            reject(json.errmsg);
+                        }
                     }
                 });
             })
@@ -63,10 +71,7 @@ export default (url = '', options) => {
                 outResolve(data);
             })
             .catch((error) => {
-                notification.error({
-                    message: '请求错误',
-                    description: error
-                });
+                message.error(error);
             })
             .then(() => {
                 setTimeout(() => options.loading && waite.close(), 200);
