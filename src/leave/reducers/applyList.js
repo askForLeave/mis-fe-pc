@@ -10,7 +10,8 @@ let initialState = immutable.fromJS({
     list: [],
     page: 1,
     pageSize: 10,
-    total: 0
+    total: 0,
+    key: 'draft'
 });
 
 export default actionReducer(initialState, {
@@ -34,7 +35,9 @@ export default actionReducer(initialState, {
             };
         },
         updater(state, action) {
-            return state.merge(action.payload);
+            return state.merge(action.payload, {
+                key: 'draft'
+            });
         }
     },
     APPLY_PUBLISH_LIST_FETCH: {
@@ -57,7 +60,9 @@ export default actionReducer(initialState, {
             };
         },
         updater(state, action) {
-            return state.merge(action.payload);
+            return state.merge(action.payload, {
+                key: 'publish'
+            });
         }
     },
     APPLY_INFO_DELETE_FETCH: {
@@ -110,7 +115,8 @@ export default actionReducer(initialState, {
                     page: tmp.page,
                     pageSize: tmp.pageSize
                 };
-                dispatch(that.APPLY_DRAFT_LIST_FETCH(params));
+                tmp.key === 'draft' ? dispatch(that.APPLY_DRAFT_LIST_FETCH(params)) : dispatch(that.APPLY_PUBLISH_LIST_FETCH(params));
+
             }
         }
     },

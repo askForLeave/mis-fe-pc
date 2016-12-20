@@ -40,6 +40,10 @@ let initialState = immutable.fromJS({
         '7': {
             name: '事假',
             description: '事假无薪'
+        },
+        '10': {
+            name: '加班',
+            description: '加班只能申请过去两个星期内的周六日及节假日'
         }
     },
     status: {

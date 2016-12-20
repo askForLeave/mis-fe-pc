@@ -10,7 +10,8 @@ let initialState = immutable.fromJS({
     list: [],
     page: 1,
     pageSize: 10,
-    total: 0
+    total: 0,
+    key: 'draft'
 });
 
 export default actionReducer(initialState, {
@@ -18,7 +19,7 @@ export default actionReducer(initialState, {
         creator(params) {
             const that = this;
             return (dispatch) => {
-                fetch('/leave/apply/draftList', {
+                fetch('/leave/apply/overtimeDraftList', {
                     data: params
                 }).then( (res) => {
                     dispatch(that.ADD_DRAFT_LIST_RECEIVE(res));
@@ -35,7 +36,9 @@ export default actionReducer(initialState, {
             };
         },
         updater(state, action) {
-            return state.merge(action.payload);
+            return state.merge(action.payload, {
+                key: 'draft'
+            });
         }
     },
 
@@ -43,7 +46,7 @@ export default actionReducer(initialState, {
         creator(params) {
             const that = this;
             return (dispatch) => {
-                fetch('/leave/apply/publishList', {
+                fetch('/leave/apply/overtimePublishList', {
                     data: params
                 }).then((res) => {
                     dispatch(that.ADD_PUBLISH_LIST_RECEIVE(res));
@@ -60,7 +63,9 @@ export default actionReducer(initialState, {
             };
         },
         updater(state, action) {
-            return state.merge(action.payload);
+            return state.merge(action.payload, {
+                key: 'publish'
+            });
         }
     },
 
@@ -116,7 +121,7 @@ export default actionReducer(initialState, {
                     page: tmp.page,
                     pageSize: tmp.pageSize
                 };
-                dispatch(that.ADD_DRAFT_LIST_FETCH(params));
+                tmp.key === 'draft' ? dispatch(that.ADD_DRAFT_LIST_FETCH(params)) : dispatch(that.ADD_PUBLISH_LIST_FETCH(params));
             }
         }
     },

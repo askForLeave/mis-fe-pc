@@ -126,7 +126,9 @@ class EditModal extends Component {
         const formProps = {
             vertical: true
         };
-        const typeOptions = _.map(edit.info.type, (value, key) => {
+        const types = Object.assign({}, edit.info.type);
+        delete types['10'];
+        const typeOptions = _.map(types, (value, key) => {
             return <Option key={key} value={key}>{value.name}</Option>
         });
         return (
