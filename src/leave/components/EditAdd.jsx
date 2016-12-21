@@ -93,29 +93,29 @@ class EditAdd extends Component {
                 {this.renderButton()}
                 <Modal {...modalProps} >
                     <Form {...formProps}>
-                        <p>加班说明：加班只能申请过去一周内的周六日</p>
+                        <p>加班说明：加班只能申请过去两周内的周六日</p>
                         <FormItem
-                            label="假期范围"
+                            label="加班日期"
                         >
                             {getFieldDecorator('time', {
                                 rules: [{
                                     type: 'object',
                                     required: true,
-                                    message: '请选择加班时间'
+                                    message: '请选择加班干时间'
                                 }]
                             })(
                                 <DatePicker format="YYYY-MM-DD" disabledDate={this.disabledDate.bind(this)} />
                             )}
                         </FormItem>
-                        <FormItem label="请假原因">
+                        <FormItem label="加班原因">
                             {getFieldDecorator('reason', {
                                 rules: [{
                                     type: 'string',
                                     required: true,
-                                    message: '请填写请假原因'
+                                    message: '请填写加班原因'
                                 }]
                             })(
-                                <Input placeholder="请输入请假原因" />
+                                <Input placeholder="请输入加班原因" />
                             )}
                         </FormItem>
                         <FormItem

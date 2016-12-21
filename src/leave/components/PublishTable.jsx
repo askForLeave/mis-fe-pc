@@ -85,7 +85,12 @@ export default class PublishTable extends Component {
             }, {
                 title: '审核原因',
                 dataIndex: 'reviewReason',
-                key: 'reviewReason'
+                key: 'reviewReason',
+                render: (text) => {
+                    return (
+                        <span>{text || '暂未审核'}</span>
+                    );
+                }
             }, {
                 title: '操作',
                 dataIndex: 'operation',
